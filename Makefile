@@ -3,14 +3,15 @@
 all: app.native app.byte
 
 run_atd: config.atd
-	atdgen -t config.atd
-	atdgen -j config.atd
+	atdgen -t config.atd && \
+	atdgen -j config.atd &&  \
+	sed -i .bak 's/unsafe_get/get/g' config_j.ml
 
 app.native: run_atd
-	ocamlfind ocamlopt -package core,atdgen -thread -linkpkg config_t.mli config_t.ml config_j.mli config_j.ml app.ml -o app.native
+	ocamlfind ocamlopt -package atdgen -thread -linkpkg config_t.mli config_t.ml config_j.mli config_j.ml app.ml -o app.native
 
 app.byte: run_atd
-	ocamlfind ocamlc -package core,atdgen -thread -linkpkg config_t.mli config_t.ml config_j.mli config_j.ml app.ml -o app.byte
+	ocamlfind ocamlc -package atdgen -thread -linkpkg config_t.mli config_t.ml config_j.mli config_j.ml app.ml -o app.byte
 
 clean:
 	rm -f *.cm* *.o config_j.* config_t.* app.native app.byte
