@@ -1,0 +1,12 @@
+{
+  "postgres": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "dev-db",
+    "user": "alice"
+  },
+
+  "port_to_listen_on": 32581,
+  "lib_dir": "./lib/",
+  "temp_dir": "./tmp/"
+}

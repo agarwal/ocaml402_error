@@ -1,0 +1,13 @@
+type postgres = {
+  host : string;
+  port : int;
+  database : string;
+  user : string;
+}
+
+type t = {
+  port_to_listen_on : int;
+  postgres : postgres;
+  lib_dir : string;
+  temp_dir : string;
+}
