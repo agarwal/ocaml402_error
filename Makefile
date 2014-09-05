@@ -3,8 +3,9 @@
 all: app.native app.byte
 
 run_atd: config.atd
-	atdgen -t config.atd
-	atdgen -j config.atd
+	atdgen -t config.atd && \
+	atdgen -j config.atd &&  \
+	sed -i .bak 's/unsafe_get/get/g' config_j.ml
 
 app.native: run_atd
 	ocamlfind ocamlopt -package atdgen -thread -linkpkg config_t.mli config_t.ml config_j.mli config_j.ml app.ml -o app.native
